@@ -1,0 +1,82 @@
+openapi: 3.1.0
+x-stoplight:
+  id: yv200lpha31cz
+info:
+  title: openapi
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/user/{id}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      operationId: get-user
+    delete:
+      summary: ''
+      operationId: delete-user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    parameters:
+      - schema:
+          type: integer
+        name: id
+        in: path
+        required: true
+        description: ユーザID
+  /user:
+    post:
+      summary: ''
+      operationId: post-user
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                icon_body:
+                  type: string
+                  format: binary
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          description: Unique identifier for the given user.
+          type: integer
+        name:
+          type: string
+        icon_path:
+          type: string
+      required:
+        - id
+        - name
+        - icon_path
